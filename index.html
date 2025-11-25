@@ -493,11 +493,11 @@
             right: 0;
             width: 100%;
             height: 100%;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             z-index: 2000;
             overflow-y: auto;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         .modal-content {
@@ -508,6 +508,7 @@
             box-shadow: var(--shadow-xl);
             animation: modalFadeIn 0.5s ease;
             overflow: hidden;
+            position: relative;
         }
 
         @keyframes modalFadeIn {
@@ -523,7 +524,7 @@
         }
 
         .modal-header {
-            padding: 2rem 2rem 1rem;
+            padding: 1.5rem 1.5rem 1rem;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
@@ -533,6 +534,7 @@
         .modal-title {
             color: var(--dark-color);
             margin-bottom: 0.5rem;
+            font-size: 1.5rem;
         }
 
         .modal-category {
@@ -550,6 +552,10 @@
             transition: var(--transition);
             padding: 0.5rem;
             border-radius: 8px;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
         }
 
         .close-modal:hover {
@@ -558,17 +564,15 @@
         }
 
         .modal-body {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
-        /* تحسينات معرض الصور */
+        /* تحسينات معرض الصور للهواتف */
         .modal-gallery {
-    display: inline-block;
-            grid-template-columns: 2fr 1fr;
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 1rem;
-            margin-bottom: 2.5rem;
-            min-height: 400px;
-            max-height: 600px;
+            margin-bottom: 2rem;
         }
 
         .gallery-main {
@@ -589,12 +593,29 @@
         }
 
         .gallery-side {
-            display: -webkit-inline-box;
-            flex-direction: column;
+            display: flex;
+            flex-direction: row;
             gap: 0.5rem;
-            overflow-y: auto;
-            max-height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
             padding: 0.5rem;
+            margin: 0 -0.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) var(--border-color);
+        }
+
+        .gallery-side::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .gallery-side::-webkit-scrollbar-track {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        .gallery-side::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 3px;
         }
 
         .gallery-item {
@@ -608,7 +629,8 @@
             cursor: pointer;
             transition: var(--transition);
             flex-shrink: 0;
-            height: 100px;
+            height: 80px;
+            width: 80px;
             position: relative;
             border: 2px solid transparent;
         }
@@ -628,32 +650,10 @@
             object-fit: cover;
         }
 
-        /* تصميم متجاوب للمعرض */
-        @media (max-width: 768px) {
-            .modal-gallery {
-                grid-template-columns: 1fr;
-                grid-template-rows: 300px auto;
-                max-height: none;
-            }
-
-            .gallery-side {
-                flex-direction: row;
-                overflow-x: auto;
-                overflow-y: hidden;
-                gap: 0.5rem;
-                padding-bottom: 0.5rem;
-            }
-
-            .gallery-item {
-                min-width: 100px;
-                height: 80px;
-            }
-        }
-
         .modal-details {
             display: flex;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            flex-direction: column;
+            gap: 2rem;
         }
 
         .detail-section h3 {
@@ -661,6 +661,7 @@
             color: var(--dark-color);
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--border-color);
+            font-size: 1.3rem;
         }
 
         .detail-section ul {
@@ -685,6 +686,7 @@
             display: flex;
             gap: 1rem;
             margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
         /* ===== ABOUT SECTION ===== */
@@ -968,7 +970,6 @@
         }
 
         @media (max-width: 768px) {
-
             .nav-links,
             .nav-cta {
                 display: none;
@@ -1011,6 +1012,124 @@
             h3 {
                 font-size: 1.6rem;
             }
+
+            /* تحسينات إضافية للهواتف */
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-content {
+                padding: 1.5rem;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+            }
+
+            .filter-buttons {
+                gap: 0.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            /* تحسينات نافذة المشروع للهواتف */
+            .project-modal {
+                padding: 0.5rem;
+            }
+
+            .modal-content {
+                margin: 1rem auto;
+            }
+
+            .modal-header {
+                padding: 1rem 1rem 0.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .modal-body {
+                padding: 1rem;
+            }
+
+
+            .gallery-item {
+                height: 70px;
+                width: 70px;
+            }
+
+            .detail-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .project-links {
+                justify-content: center;
+            }
+
+            .project-links .btn {
+                flex: 1;
+                min-width: 140px;
+                justify-content: center;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .gallery-main {
+                height: 200px;
+            }
+
+            .gallery-item {
+                height: 60px;
+                width: 60px;
+            }
+
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ===== ANIMATIONS ===== */
@@ -1044,6 +1163,44 @@
             padding: 3rem;
             font-size: 1.3rem;
             color: var(--text-light);
+        }
+
+        /* تحسينات القائمة المتنقلة */
+        @media (max-width: 768px) {
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                background: white;
+                padding: 1.5rem;
+                box-shadow: var(--shadow-lg);
+                z-index: 1000;
+            }
+
+            .nav-cta.active {
+                display: flex;
+                position: absolute;
+                top: calc(100% + 180px);
+                right: 0;
+                width: 100%;
+                padding: 0 1.5rem;
+                justify-content: center;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
         }
     </style>
 </head>
@@ -1125,16 +1282,32 @@
             </div>
             <div class="projects-grid">
                 <!-- المشاريع مباشرة في HTML -->
-                
+
                 <div class="project-card" data-category="app" data-project="project1">
                     <div class="project-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
-                        <img src="img/moblle_deves_1.jpg"
-                            alt="Device info">
+                        <img src="img/moblle_deves_1.jpg" alt="Device info">
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Device info</h3>
                         <p class="project-description">
-ظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام. النظام يعرض بيانات حساسة ومهمة تساعد ...                        </p>
+                            ظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام.
+                            النظام يعرض بيانات حساسة ومهمة تساعد ... </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Dart</span>
+                            <span class="project-tag">Flutter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="app" data-project="project2">
+                    <div class="project-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
+                        <img src="img/books_1.jpg" alt="Device info">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Device info</h3>
+                        <p class="project-description">
+                            ظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام.
+                            النظام يعرض بيانات حساسة ومهمة تساعد ... </p>
                         <div class="project-tags">
                             <span class="project-tag">Dart</span>
                             <span class="project-tag">Flutter</span>
@@ -1350,24 +1523,32 @@
     <script>
         // بيانات المشاريع التفصيلية
         const projectsData = {
-        
-                project1: {
+            project1: {
                 title: "Device info",
                 category: "app",
-                description: "نظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام. النظام يعرض بيانات حساسة ومهمة تساعد المستخدم والمطوّر على فهم حالة الجهاز كاملة. يتميز المشروع بالسرعة، الدقة، والدعم الكامل لمختلف الأجهزة." ,
+                description: "نظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام. النظام يعرض بيانات حساسة ومهمة تساعد المستخدم والمطوّر على فهم حالة الجهاز كاملة. يتميز المشروع بالسرعة، الدقة، والدعم الكامل لمختلف الأجهزة.",
                 technologies: ["Dart", "Flutter"],
-                links: ["https://example-ecommerce.com", "https://github.com/example/ecommerce"],
+                links: ["https://play.google.com/store/apps/details?id=com.kararjabr.device_info", "https://github.com/example/ecommerce"],
                 images: [
                     "img/moblle_deves_1.jpg",
                     "img/moblle_deves_2.jpg",
                     "img/moblle_deves_3.jpg",
                     "img/moblle_deves_4.jpg",
                     "img/moblle_deves_5.jpg",
-                    "img/moblle_deves_5.jpg",
-                    "img/moblle_deves_5.jpg",
-                    "img/moblle_deves_5.jpg",
                 ]
-
+            },
+            project2: {
+                title: "Device info",
+                category: "app",
+                description: "نظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام. النظام يعرض بيانات حساسة ومهمة تساعد المستخدم والمطوّر على فهم حالة الجهاز كاملة. يتميز المشروع بالسرعة، الدقة، والدعم الكامل لمختلف الأجهزة.",
+                technologies: ["Dart", "Flutter"],
+                links: ["https://play.google.com/store/apps/details?id=com.kararjabr.device_info", "https://github.com/example/ecommerce"],
+                images: [
+                    "img/books_1.jpg",
+                    "img/books_2.jpg",
+                    "img/books_3.jpg",
+                    "img/books_4.jpg",
+                ]
             },
         };
 
@@ -1467,6 +1648,11 @@
                     closeProjectModal();
                 }
             });
+
+            // منع إغلاق النافذة عند النقر داخل المحتوى
+            document.querySelector('.modal-content').addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
         }
 
         function handleFilterClick(e) {
@@ -1495,8 +1681,15 @@
             const navCta = document.querySelector('.nav-cta');
 
             menuToggle.classList.toggle('active');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navCta.style.display = navCta.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.classList.toggle('active');
+            navCta.classList.toggle('active');
+            
+            // إضافة أو إزالة منع التمرير
+            if (menuToggle.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
 
         function closeMobileMenu() {
@@ -1505,8 +1698,9 @@
             const navCta = document.querySelector('.nav-cta');
 
             menuToggle.classList.remove('active');
-            navLinks.style.display = 'none';
-            navCta.style.display = 'none';
+            navLinks.classList.remove('active');
+            navCta.classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         function handleFormSubmit(e) {
@@ -1529,6 +1723,7 @@
 
         function closeProjectModal() {
             document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = '';
         }
 
         // ===== PROJECT FUNCTIONS =====
@@ -1581,23 +1776,23 @@
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
                 if (index === 0) galleryItem.classList.add('active');
-                
+
                 const imgElement = document.createElement('img');
                 imgElement.src = img;
                 imgElement.alt = `${project.title} - صورة ${index + 1}`;
-                
+
                 galleryItem.appendChild(imgElement);
-                galleryItem.addEventListener('click', function() {
+                galleryItem.addEventListener('click', function () {
                     // تحديث الصورة الرئيسية
                     modalMainImage.src = img;
-                    
+
                     // تحديث العنصر النشط
                     document.querySelectorAll('.gallery-item').forEach(item => {
                         item.classList.remove('active');
                     });
                     this.classList.add('active');
                 });
-                
+
                 gallerySide.appendChild(galleryItem);
             });
 
@@ -1607,6 +1802,7 @@
 
             // عرض النافذة
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function getCategoryName(category) {
