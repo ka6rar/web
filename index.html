@@ -561,16 +561,17 @@
             padding: 2rem;
         }
 
+        /* تحسينات معرض الصور */
         .modal-gallery {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
+    display: inline-block;
+            grid-template-columns: 2fr 1fr;
             gap: 1rem;
             margin-bottom: 2.5rem;
-            height: 400px;
+            min-height: 400px;
+            max-height: 600px;
         }
 
         .gallery-main {
-            grid-row: span 2;
             border-radius: var(--border-radius);
             overflow: hidden;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -578,6 +579,7 @@
             align-items: center;
             justify-content: center;
             color: white;
+            position: relative;
         }
 
         .gallery-main img {
@@ -587,8 +589,12 @@
         }
 
         .gallery-side {
-            display: grid;
-            gap: 1rem;
+            display: -webkit-inline-box;
+            flex-direction: column;
+            gap: 0.5rem;
+            overflow-y: auto;
+            max-height: 100%;
+            padding: 0.5rem;
         }
 
         .gallery-item {
@@ -601,10 +607,19 @@
             overflow: hidden;
             cursor: pointer;
             transition: var(--transition);
+            flex-shrink: 0;
+            height: 100px;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .gallery-item.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px var(--primary-color);
         }
 
         .gallery-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .gallery-item img {
@@ -613,8 +628,30 @@
             object-fit: cover;
         }
 
+        /* تصميم متجاوب للمعرض */
+        @media (max-width: 768px) {
+            .modal-gallery {
+                grid-template-columns: 1fr;
+                grid-template-rows: 300px auto;
+                max-height: none;
+            }
+
+            .gallery-side {
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                gap: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .gallery-item {
+                min-width: 100px;
+                height: 80px;
+            }
+        }
+
         .modal-details {
-            display: grid;
+            display: flex;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
         }
@@ -954,20 +991,6 @@
                 padding-left: 0;
             }
 
-            .modal-gallery {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-
-            .gallery-main {
-                grid-row: auto;
-                height: 300px;
-            }
-
-            .gallery-side {
-                grid-template-columns: 1fr 1fr;
-            }
-
             .hero-stats {
                 flex-direction: column;
                 gap: 2rem;
@@ -1137,19 +1160,8 @@
                     <div class="gallery-main">
                         <img id="modalMainImage" src="" alt="صورة المشروع الرئيسية">
                     </div>
-                    <div class="gallery-side">
-                        <div class="gallery-item">
-                            <img src="" alt="صورة المشروع 1">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="" alt="صورة المشروع 2">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="" alt="صورة المشروع 3">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="" alt="صورة المشروع 4">
-                        </div>
+                    <div class="gallery-side" id="gallerySide">
+                        <!-- الصور الجانبية سيتم إضافتها ديناميكياً -->
                     </div>
                 </div>
                 <div class="modal-details">
@@ -1340,17 +1352,20 @@
         const projectsData = {
         
                 project1: {
-                title: "منصة تجارة إلكترونية متكاملة",
+                title: "Device info",
                 category: "app",
-                description: "ظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام. النظام يعرض بيانات حساسة ومهمة تساعد المستخدم والمطوّر على فهم حالة الجهاز كاملة.يتميز المشروع بالسرعة، الدقة، والدعم الكامل لمختلف الأجهزة." ,
+                description: "نظام متكامل لعرض جميع معلومات الجهاز والنظام بشكل دقيق ومنظم، مع واجهة حديثة وسهلة الاستخدام. النظام يعرض بيانات حساسة ومهمة تساعد المستخدم والمطوّر على فهم حالة الجهاز كاملة. يتميز المشروع بالسرعة، الدقة، والدعم الكامل لمختلف الأجهزة." ,
                 technologies: ["Dart", "Flutter"],
                 links: ["https://example-ecommerce.com", "https://github.com/example/ecommerce"],
                 images: [
-                    "img/moblle_deves_1.jpg?w=800&h=500&fit=crop",
-                    "img/moblle_deves_2.jpg?w=800&h=500&fit=crop",
-                    "img/moblle_deves_3.jpg?w=800&h=500&fit=crop",
-                    "img/moblle_deves_4.jpg?w=800&h=500&fit=crop",
-                    "img/moblle_deves_5.jpg?w=800&h=500&fit=crop",
+                    "img/moblle_deves_1.jpg",
+                    "img/moblle_deves_2.jpg",
+                    "img/moblle_deves_3.jpg",
+                    "img/moblle_deves_4.jpg",
+                    "img/moblle_deves_5.jpg",
+                    "img/moblle_deves_5.jpg",
+                    "img/moblle_deves_5.jpg",
+                    "img/moblle_deves_5.jpg",
                 ]
 
             },
@@ -1452,20 +1467,6 @@
                     closeProjectModal();
                 }
             });
-
-            // تغيير الصورة الرئيسية عند النقر على الصور الجانبية
-            document.addEventListener('click', function (e) {
-                if (e.target.closest('.gallery-item')) {
-                    const clickedImg = e.target.closest('.gallery-item').querySelector('img');
-                    const mainImg = document.getElementById('modalMainImage');
-                    if (clickedImg && mainImg) {
-                        // تبادل الصور
-                        const tempSrc = mainImg.src;
-                        mainImg.src = clickedImg.src;
-                        clickedImg.src = tempSrc;
-                    }
-                }
-            });
         }
 
         function handleFilterClick(e) {
@@ -1555,6 +1556,7 @@
             const modalMainImage = document.getElementById('modalMainImage');
             const modalProjectLink = document.getElementById('modalProjectLink');
             const modalCodeLink = document.getElementById('modalCodeLink');
+            const gallerySide = document.getElementById('gallerySide');
 
             // تعيين بيانات المشروع
             modalTitle.textContent = project.title;
@@ -1569,16 +1571,34 @@
                 modalTechnologies.appendChild(li);
             });
 
-            // تعيين الصور
+            // تعيين الصورة الرئيسية
             modalMainImage.src = project.images[0];
             modalMainImage.alt = project.title;
 
-            const galleryItems = document.querySelectorAll('.gallery-item img');
-            project.images.slice(1).forEach((img, index) => {
-                if (galleryItems[index]) {
-                    galleryItems[index].src = img;
-                    galleryItems[index].alt = `${project.title} - صورة ${index + 2}`;
-                }
+            // إنشاء معرض الصور الجانبي
+            gallerySide.innerHTML = '';
+            project.images.forEach((img, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                if (index === 0) galleryItem.classList.add('active');
+                
+                const imgElement = document.createElement('img');
+                imgElement.src = img;
+                imgElement.alt = `${project.title} - صورة ${index + 1}`;
+                
+                galleryItem.appendChild(imgElement);
+                galleryItem.addEventListener('click', function() {
+                    // تحديث الصورة الرئيسية
+                    modalMainImage.src = img;
+                    
+                    // تحديث العنصر النشط
+                    document.querySelectorAll('.gallery-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+                
+                gallerySide.appendChild(galleryItem);
             });
 
             // تعيين الروابط
