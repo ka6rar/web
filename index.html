@@ -1254,10 +1254,10 @@
                         <span class="stat-number">50+</span>
                         <span class="stat-label">مشروع مكتمل</span>
                     </div>
-                    <div class="stat-item">
+                    <!-- <div class="stat-item">
                         <span class="stat-number">35+</span>
                         <span class="stat-label">عميل سعيد</span>
-                    </div>
+                    </div> -->
                     <div class="stat-item">
                         <span class="stat-number">10+</span>
                         <span class="stat-label">سنوات خبرة</span>
@@ -1397,7 +1397,8 @@
                     <div class="project-content">
                         <h3 class="project-title">Wolf VPN </h3>
                         <p class="project-description">
-                          عندما يتعلق الأمر بسلامة وأمن الإنترنت ، فإن Wolf VPN هي أداة أساسية. يشفر اتصالك بحيث يتعذر على الأطراف الخارجية تتبع نشاطك على الإنترنت ، مما يجعله أكثر أمانًا من الوكيل العادي.
+                            عندما يتعلق الأمر بسلامة وأمن الإنترنت ، فإن Wolf VPN هي أداة أساسية. يشفر اتصالك بحيث يتعذر
+                            على الأطراف الخارجية تتبع نشاطك على الإنترنت ، مما يجعله أكثر أمانًا من الوكيل العادي.
                         </p>
                         <div class="project-tags">
                             <span class="project-tag">Dart</span>
@@ -1497,8 +1498,8 @@
                 </div>
                 <div class="about-image">
                     <div class="image-placeholder">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=face"
-                            alt="الصورة الشخصية">
+                        <img src="img/me.png" alt="الصورة الشخصية">
+
                     </div>
                 </div>
             </div>
@@ -1519,8 +1520,8 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div>
-                            <h4>البريد الإلكتروني</h4>
-                            <p>hello@example.com</p>
+                            <h4 style="color: white;">البريد الإلكتروني</h4>
+                            <p style="color: white;">kaar3931@gmail.com</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1528,8 +1529,8 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div>
-                            <h4>الهاتف</h4>
-                            <p>+966 50 123 4567</p>
+                            <h4 style="color: white;">الهاتف</h4>
+                            <p style="color: white;">+9647821764349</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1537,29 +1538,69 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div>
-                            <h4>الموقع</h4>
-                            <p>الرياض، المملكة العربية السعودية</p>
+                            <h4 style="color: white;">الموقع</h4>
+                            <p style="color: white;">البصرة,العراق </p>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
+                <form class="contact-form" id="contactForm">
                     <div class="form-group">
                         <label for="name">الاسم الكامل</label>
-                        <input type="text" id="name" required placeholder="أدخل اسمك الكامل">
+                        <input type="text" id="name" name="name" required placeholder="أدخل اسمك الكامل">
                     </div>
+
                     <div class="form-group">
                         <label for="email">البريد الإلكتروني</label>
-                        <input type="email" id="email" required placeholder="أدخل بريدك الإلكتروني">
+                        <input type="email" id="email" name="email" required placeholder="أدخل بريدك الإلكتروني">
                     </div>
+
                     <div class="form-group">
                         <label for="message">الرسالة</label>
-                        <textarea id="message" required placeholder="أخبرني عن مشروعك..."></textarea>
+                        <textarea id="message" name="message" required placeholder="أخبرني عن مشروعك..."></textarea>
                     </div>
+
                     <button type="submit" class="btn">
                         <span>إرسال الرسالة</span>
                         <i class="fas fa-paper-plane"></i>
                     </button>
+
+                    <p id="status"></p>
                 </form>
+
+                <script>
+                    const form = document.getElementById('contactForm');
+                    const status = document.getElementById('status');
+
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault();
+
+                        const data = new FormData(form);
+
+                        // ضع رابط Formspree هنا 👇
+                        const endpoint = "https://formspree.io/f/mangezvl";
+
+                        status.innerText = "جارٍ الإرسال...";
+
+                        try {
+                            const res = await fetch(endpoint, {
+                                method: "POST",
+                                body: data,
+                                headers: { "Accept": "application/json" }
+                            });
+
+                            if (res.ok) {
+                                status.innerText = "✔ تم إرسال الرسالة بنجاح";
+                                form.reset();
+                            } else {
+                                status.innerText = "❌ حدث خطأ أثناء الإرسال";
+                            }
+
+                        } catch (err) {
+                            status.innerText = "⚠ فشل الاتصال — تحقق من الإنترنت";
+                        }
+                    });
+                </script>
+
             </div>
         </div>
     </section>
@@ -1573,10 +1614,10 @@
                     <p class="footer-description">مطور ويب محترف متخصص في إنشاء تجارب رقمية استثنائية تجمع بين الإبداع
                         والأداء المتميز.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <!-- <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> -->
+                        <a href="https://github.com/ka6rar" aria-label="GitHub"><i class="fab fa-github"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+                        <!-- <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a> -->
                     </div>
                 </div>
                 <div class="footer-links">
@@ -1600,14 +1641,14 @@
                 <div class="footer-links">
                     <h4>الاتصال</h4>
                     <ul>
-                        <li><a href="mailto:hello@example.com">hello@example.com</a></li>
-                        <li><a href="tel:+966501234567">+966 50 123 4567</a></li>
-                        <li><a href="#">الرياض، السعودية</a></li>
+                        <li><a href="mailto:hello@example.com">karar3931@gmail.com</a></li>
+                        <li><a href="tel:+966501234567">+9647821764349</a></li>
+                        <li><a href="#">البصرة, العراق</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© <span id="current-year">2023</span> جميع الحقوق محفوظة. صمم بتقنية ❤️</p>
+                <p>© <span id="current-year">2025</span> جميع الحقوق محفوظة.❤️</p>
             </div>
         </div>
     </footer>
