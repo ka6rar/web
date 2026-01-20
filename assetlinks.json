@@ -1,0 +1,5 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.kararjabr.pharmacist ",
+               "sha256_cert_fingerprints": ["D7:B4:2B:77:4D:0D:FC:23:7D:8B:DA:18:E0:EC:8B:EE:7E:AE:52:68:FC:2A:0A:BC:F7:4A:88:D7:2A:18:0C:FC"] }
+}]
